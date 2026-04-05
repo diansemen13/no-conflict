@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нет - конфликту, да - гармонии!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Первые шаги в мире SVG-фавиконов -->
+    <!-- Самый надёжный вариант для большинства случаев -->
+    <link rel="icon" href="image.png" type="image/x-icon">
+    <!-- И дополнительно для современных браузеров -->
+    <link rel="icon" href="image.png" type="image/svg+xml">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/site.webmanifest" />
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#problem">Проблема</a></li>
+            <li><a href="#conflict">Конфликт</a></li>
+            <li><a href="#research">Исследование</a></li>
+            <li><a href="#game">Игра</a></li>
+            <li><a href="#bullying">Буллинг</a></li>
+            <li><a href="#recommendations">Рекомендации</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Школа Согласия:<br>Путь к Миру</h1>
+            <p class="subtitle">Исследовательский проект</p>
+            <p class="description">
+                Профилактика конфликтов среди учащихся 5–6 классов<br>
+                через ролевую игру на основе D&D
+            </p>
+            <div class="author-info">
+                <strong>Автор:</strong> Папст Дарья Дмитриевна<br>
+                Ученица 10А класса БМАОУ «СОШ № 45»
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('problem').scrollIntoView({behavior: 'smooth'})">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </div>
+    </section>
+
+    <section id="problem" class="fade-in">
+        <h2>Актуальность Проблемы</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; line-height: 1.8;">
+            Современные школьники всё чаще испытывают проблемы в межличственных отношениях, 
+            что приводит к росту конфликтных ситуаций в образовательной среде.
+        </p>
+        
+        <div class="problem-grid">
+            <div class="problem-card">
+                <span class="stat-number">60%</span>
+                <h3>Учащихся сталкиваются с трудностями общения</h3>
+                <p>Постоянное напряжение влияет на психическое здоровье и успеваемость</p>
+            </div>
+            <div class="problem-card">
+                <span class="stat-number">67%</span>
+                <h3>В 5-7 классах часто сталкиваются с конфликтами</h3>
+                <p>Переходный возраст, гормональные изменения, борьба за статус</p>
+            </div>
+            <div class="problem-card">
+                <span class="stat-number">82%</span>
+                <h3>Не обращаются к взрослым за помощью</h3>
+                <p>Учащиеся избегают решения проблем или решают их самостоятельно</p>
+            </div>
+        </div>
+    </section>
+
+        <div class="system-interaction">
+            <h3>Школа — сложная система взаимодействия</h3>
+            <div class="actors">
+                <div class="actor">
+                    <div class="actor-icon">👨‍🎓</div>
+                    <strong>Ученики</strong>
+                    <small>Формирование социальных навыков</small>
+                </div>
+                <div class="actor">
+                    <div class="actor-icon">👨‍🏫</div>
+                    <strong>Учителя</strong>
+                    <small>Медиация и профилактика</small>
+                </div>
+                <div class="actor">
+                    <div class="actor-icon">👨‍👩‍👧</div>
+                    <strong>Родители</strong>
+                    <small>Семейное воспитание</small>
+                </div>
+                <div class="actor">
+                    <div class="actor-icon">🏫</div>
+                    <strong>Администрация</strong>
+                    <small>Политика безопасности</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="conflict" class="conflict-section fade-in">
+        <h2>Конфликт: Вред или Польза?</h2>
+        
+        <div class="toggle-container">
+            <button class="toggle-btn active" onclick="showConflict('harm')">Вредная сторона</button>
+            <button class="toggle-btn" onclick="showConflict('benefit')">Полезная сторона</button>
+            <button class="toggle-btn" onclick="showConflict('types')">Виды конфликтов</button>
+        </div>
+
+        <div id="harm" class="conflict-content active">
+            <div class="pros-cons-grid">
+                <div class="cons">
+                    <h3>⚠️ Негативные последствия</h3>
+                    <ul>
+                        <li>😰 Тревожность и стресс</li>
+                        <li>😴 Нарушение сна (бессонница, кошмары)</li>
+                        <li>📉 Снижение успеваемости</li>
+                        <li>😡 Агрессия и изоляция</li>
+                        <li>💔 Разрушение социальных связей</li>
+                    </ul>
+                </div>
+                <div class="conflict-note">
+                    <p>Конфликты отвлекают от учебного процесса и влияют на психическое здоровье</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="benefit" class="conflict-content">
+            <div class="pros-cons-grid">
+                <div class="pros">
+                    <h3>✅ Позитивные возможности</h3>
+                    <ul>
+                        <li>💬 Навыки коммуникации</li>
+                        <li>🤝 Умение договариваться</li>
+                        <li>🧘 Саморегуляция эмоций</li>
+                        <li>🎯 Подготовка к взрослой жизни</li>
+                        <li>🌟 Жизненно важные социальные навыки</li>
+                    </ul>
+                </div>
+                <div class="conflict-note">
+                    <p><strong>Всё зависит от умения управлять конфликтом!</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="types" class="conflict-content">
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>👥 Межличностные</h3>
+                    <p>Два ученика — столкновение между отдельными личностями из-за различий во взглядах, интересах или поведении</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🧍‍♂️👥 Личностно-групповые</h3>
+                    <p>Ребёнок против группы — конфликт индивида с коллективом, часто связанный с неприятием или изоляцией</p>
+                </div>
+                <div class="problem-card">
+                    <h3>👥👥 Межгрупповые</h3>
+                    <p>Группа против группы — противостояние между различными социальными группами (классами, кликами)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="fade-in">
+        <h2>Исследование и Цели</h2>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="big-number">100</div>
+                <p>учащихся опрошено<br>5-6 классы</p>
+            </div>
+            <div class="stat-card">
+                <div class="big-number">47%</div>
+                <p>избегают решения<br>конфликтов</p>
+            </div>
+            <div class="stat-card">
+                <div class="big-number">2.5×</div>
+                <p>чаще дети из<br>конфликтных семей<br>становятся агрессорами</p>
+            </div>
+        </div>
+
+        <div class="methods-timeline">
+            <h3>Конфликтологическая компетентность в образовательной среде: <br>
+                природа школьных конфликтов и стратегии <br>
+                их конструктивного разрешения</h3>
+            <p>До 70% школьников сталкивались с травлей, а конфликты с педагогами — одна из главных причин снижения<br>
+                успеваемости и роста школьной тревожности. Статья посвящена анализу природы школьных конфликтов, их профилактике и конструктивному разрешению.
+            </p>
+            <br>
+            <p>Буллинг — систематическое агрессивное поведение с неравенством сил и намерением причинить вред.</p>
+            <br>
+            <div class="body-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Вид буллинга</th>
+                            <th>Проявления</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Физический</td>
+                            <td>Толчки, удары, порча вещей</td>
+                        </tr>
+                        <tr>
+                            <td>Вербальный</td>
+                            <td>Оскорбления, угрозы, слухи</td>
+                        </tr>
+                        <tr>
+                            <td>Социальный</td>
+                            <td>Игнорирование, бойкот, исключение из группы</td>
+                        </tr>
+                        <tr>
+                            <td>Кибербуллинг</td>
+                            <td>Травля в соцсетях и мессенджерах</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <p style="text-align: center; font-weight: bold;">
+                    Причины
+                </p>
+                <p>Индивидуальные: агрессивность, низкая эмпатия, стремление к доминированию.<br>
+                   Средовые: неблагоприятный климат в классе, отсутствие правил и санкций, попустительство педагогов.<br>
+                   Семейные: насилие или эмоциональная холодность, авторитарный или попустительский стиль воспитания.
+                </p>
+                <br>
+                <p style="text-align: center; font-weight: bold;">Методы работы с конфликтами</p><br>
+                <p>Как предотвратить буллинг: программа Ольвеуса</p><br>
+                <p>Самая известная в мире система профилактики травли строится на пяти принципах:</p>
+                <p>1.	В школе действуют чёткие правила с неминуемыми последствиями за их нарушение.</p>
+                <p>2.	Проводятся занятия и игры на развитие эмпатии и уважения к другим.</p>
+                <p>3.	Классы вовлекаются в совместные внеурочные проекты.</p>
+                <p>4.	Учителей учат замечать ранние признаки травли.</p>
+                <p>5.	Родители активно участвуют в жизни школы.</p><br>
+                <p>Школьная служба примирения (медиация)</p><br>
+                <p>Правила медиации:</p>
+                <p>- Участие только добровольное.</p>
+                <p>- Медиатор не принимает ничью сторону.</p>
+                <p>- Всё, что говорится на встрече, остаётся между участниками (если нет угрозы жизни).</p>
+                <p>- Главное — не кто виноват, а что нужно сделать, чтобы исправить ситуацию.</p>
+                <p>Этапы:</p>
+                <p>1.	Медиатор беседует с каждым участником по отдельности.</p>
+                <p>2.	Организуется общая встреча, где каждый высказывает свои чувства и предлагает выход.</p>
+                <p>3.	Составляется письменное соглашение.</p>
+                <p>4.   Стороны следят за его выполнением.</p><br>
+                <p>Результат: более 80 % конфликтов заканчиваются примирением.</p><br>
+                <p style="text-align: center; font-weight: bold;">Коммуникативные навыки, которые спасают от конфликтов</p>
+                <p>Техника «Я-высказывание»:</p>
+                <p>Говорите о своих эмоциях, а не о недостатках другого.</p>
+                <p>Пример: «Я злюсь, когда меня перебивают» вместо «Ты вечно лезешь со словами».</p><br>
+                <p>Активное слушание:</p>
+                <p>Пересказывайте услышанное своими словами, уточняйте, называйте эмоции собеседника. Это снимает напряжение.</p><br>
+                <p>Гарвардский метод переговоров (4 правила):</p>
+                <p>- Отделяйте личность человека от обсуждаемой проблемы.</p>
+                <p>- Интересы важнее заявленных позиций (спрашивайте «почему?»).</p>
+                <p>- Ищите варианты, выгодные обеим сторонам.</p>
+                <p>- Опирайтесь на объективные нормы (законы, правила, факты).</p><br>
+                <p>Как развивается конфликт (стадии):</p>
+                <p>Скрытое напряжение → Повод для столкновения → Нарастание эмоций → Пик конфликта → Исход (решение или затухание)</p>
+                <h3>Конфликт сам по себе — не зло. Это всего лишь столкновение интересов.<br>
+                    Злом он становится только тогда, когда мы не умеем им управлять.</h3><br>
+                <p>Три кита бесконфликтного общения:</p>
+                <p style="text-align: center; font-weight: bold;">Внимание к чувствам другого + Умение договариваться + Личная ответственность = Решение</p>   
+                <p>Освоив эти навыки, ученик учится отстаивать границы,<br>
+                   учитель — строить уважительные отношения, а родитель — укреплять доверие. В выигрыше остаются все.</p>
+            </div>
+        </div>
+
+
+
+    <section id="game" class="game-section fade-in">
+        <h2>🎲 Школа Согласия: Игра</h2>
+        <p class="game-intro">
+            Ролевая игра на основе D&D (Dungeons & Dragons) для обучения конструктивному разрешению конфликтов
+        </p>
+
+        <div class="dice-container">
+            <div class="dice" onclick="rollDice(this)">d20</div>
+            <div class="dice" onclick="rollDice(this)">d6</div>
+            <div class="dice" onclick="rollDice(this)">d4</div>
+        </div>
+
+        <h3>Выбери своего персонажа</h3>
+        <div class="characters-grid">
+            <div class="character-card" onclick="selectCharacter(this)">
+                <div class="character-icon">📚</div>
+                <h4>Отличник</h4>
+                <p>Коммуникабельность</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter(this)">
+                <div class="character-icon">⚽</div>
+                <h4>Спортсмен</h4>
+                <p>Авторитет</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter(this)">
+                <div class="character-icon">🎨</div>
+                    <h4>Художник</h4>
+                    <p>Креативность</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter(this)">
+                <div class="character-icon">💻</div>
+                <h4>Программист</h4>
+                <p>Самообладание</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter(this)">
+                <div class="character-icon">📢</div>
+                <h4>Активистка</h4>
+                <p>Лидерство</p>
+            </div>
+            <div class="character-card" onclick="selectCharacter(this)">
+                <div class="character-icon">🌱</div>
+                <h4>Новичок</h4>
+                <p>Развитие</p>
+            </div>
+        </div>
+
+        <div class="scenario-box">
+            <h3>🎭 Сценарий: «Забытый проект»</h3>
+            <p>Один ученик сделал всю работу над групповым проектом, но оценка общая. Что будешь делать?</p>
+            
+            <div class="choices">
+                <button class="choice-btn" onclick="showResult(this, 'bad')">
+                    A) Обвинить партнёра в безответственности
+                </button>
+                <button class="choice-btn" onclick="showResult(this, 'good')">
+                    B) Поговорить спокойно и разделить задачи
+                </button>
+                <button class="choice-btn" onclick="showResult(this, 'best')">
+                    C) Попросить учителя разделить оценку индивидуально
+                </button>
+            </div>
+            
+            <div class="result-message" id="result"></div>
+        </div>
+
+        <div class="harmony-system">
+            <h3>🎯 Система «Очки Гармонии»</h3>
+            <div class="harmony-grid">
+                <div class="harmony-plus">
+                    <h4>Получение очков:</h4>
+                    <ul>
+                        <li>+1 Выслушивание оппонента</li>
+                        <li>+2 Предложение компромисса</li>
+                        <li>+3 Признание своих ошибок</li>
+                    </ul>
+                </div>
+                <div class="harmony-minus">
+                    <h4>Потеря очков:</h4>
+                    <ul>
+                        <li>-1 Переход на личности</li>
+                        <li>-2 Угрозы или оскорбления</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bullying" class="fade-in">
+        <h2>⚠️ Буллинг: Не просто ссора</h2>
+        
+        <div class="bullying-alert">
+            <h3>Буллинг имеет правовые последствия!</h3>
+            <p>Систематическая травля с уголовной, административной и дисциплинарной ответственностью</p>
+        </div>
+
+        <h3>Формы буллинга (по Минпросвещению)</h3>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>🧠 Психологическая</h3>
+                <ul>
+                    <li>Насмешки и обзывания</li>
+                    <li>Угрозы и запугивание</li>
+                    <li>Социальная изоляция</li>
+                </ul>
+            </div>
+            <div class="problem-card">
+                <h3>📱 Информационная</h3>
+                <ul>
+                    <li>Распространение слухов</li>
+                    <li>Сплетни и клевета</li>
+                    <li>Бойкот и отвержение</li>
+                </ul>
+            </div>
+            <div class="problem-card">
+                <h3>💰 Материальная</h3>
+                <ul>
+                    <li>Рэкет и вымогательство</li>
+                    <li>Порча личных вещей</li>
+                    <li>Кража имущества</li>
+                </ul>
+            </div>
+            <div class="problem-card">
+                <h3>💻 Интерактивная</h3>
+                <ul>
+                    <li>Кибербуллинг в соцсетях</li>
+                    <li>Онлайн-травля</li>
+                    <li>Распространение контента</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Ответственность за буллинг</h3>
+        <div class="responsibility-grid">
+            <div class="responsibility-card disciplinary">
+                <h4>📋 Дисциплинарная</h4>
+                <p>ФЗ-273 «Об образовании»</p>
+                <ul>
+                    <li>Замечание</li>
+                    <li>Выговор</li>
+                    <li>Отчисление (с 14–15 лет)</li>
+                </ul>
+            </div>
+            <div class="responsibility-card administrative">
+                <h4>⚖️ Административная</h4>
+                <p>КоАП РФ</p>
+                <ul>
+                    <li>Штраф 3 000 – 30 000 руб.</li>
+                    <li>Арест до 15 суток</li>
+                    <li>Обязательные работы</li>
+                </ul>
+            </div>
+            <div class="responsibility-card criminal">
+                <h4>🔒 Уголовная</h4>
+                <p>УК РФ (с 16 лет)</p>
+                <ul>
+                    <li>До 15 лет лишения свободы</li>
+                    <li>Ст. 110 — доведение до самоубийства</li>
+                    <li>Ст. 282 — разжигание ненависти</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="recommendations" class="recommendations-section fade-in">
+        <h2>Рекомендации</h2>
+        
+        <div class="rec-tabs">
+            <button class="rec-tab active" onclick="showRec('parents')">Для родителей</button>
+            <button class="rec-tab" onclick="showRec('teachers')">Для учителей</button>
+            <button class="rec-tab" onclick="showRec('students')">Для учащихся</button>
+        </div>
+
+        <div id="parents" class="rec-content active">
+            <div class="do-dont">
+                <div class="do">
+                    <h3>✅ Что делать</h3>
+                    <ul>
+                        <li>Развивать коммуникацию — обсуждать эмоции</li>
+                        <li>Уважать границы ребёнка</li>
+                        <li>Избегать унижений и физических наказаний</li>
+                        <li>Поддерживать самооценку</li>
+                        <li>Быть примером конструктивного поведения</li>
+                    </ul>
+                </div>
+                <div class="dont">
+                    <h3>❌ Что не делать</h3>
+                    <ul>
+                        <li>Решать проблемы через крики</li>
+                        <li>Игнорировать эмоции («Не реви», «Переборешь»)</li>
+                        <li>Сравнивать с другими («А Ваня уже...»)</li>
+                        <li>Защищать агрессивное поведение</li>
+                        <li>Закрывать глаза на конфликты</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="teachers" class="rec-content">
+            <div class="cards">
+                <div class="card">
+                    <h3>👁️ Признаки назревающего конфликта</h3>
+                    <ul>
+                        <li>Избегание одноклассников</li>
+                        <li>Потеря интереса к учёбе</li>
+                        <li>Агрессия, перепады настроения</li>
+                        <li>Шёпот, насмешки за спиной</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🎯 Роль учителя</h3>
+                    <ul>
+                        <li>Нейтральная позиция</li>
+                        <li>Достижение диалога</li>
+                        <li>Избегание «любимчиков»</li>
+                        <li>Внимание к изменениям</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🔧 Методы разрешения</h3>
+                    <ul>
+                        <li>Компромисс — взаимные уступки</li>
+                        <li>Сотрудничество — совместный поиск</li>
+                        <li>Посредничество — третья сторона</li>
+                        <li>Принуждение — крайний случай</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="students" class="rec-content">
+            <div class="phrases-box">
+                <h3>«Волшебные фразы» для разрешения конфликтов</h3>
+                <div class="phrase-list">
+                    <blockquote>«Я понимаю твою точку зрения...»</blockquote>
+                    <blockquote>«Давай найдём решение вместе»</blockquote>
+                    <blockquote>«Извини, если я тебя обидел(а)»</blockquote>
+                    <blockquote>«Может, мы оба немного правы?»</blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="peace-symbol">☮️</div>
+        <h2>Конфликт — не зло, а естественное явление</h2>
+        <p>Всё зависит от умения управлять им. Проект «Школа согласия» даёт готовые инструменты для педагогов, учащихся и родителей.</p>
+        <div class="footer-info">
+            <p>БМАОУ «СОШ № 45» | Папст Дарья Дмитриевна, 10А класс</p>
+            <p>© 2026 Школа Согласия: Путь к Миру</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
