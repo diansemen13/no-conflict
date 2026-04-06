@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Школа Согласия: профилактика конфликтов среди учащихся через ролевую игру">
+    <meta name="theme-color" content="#2c5f4a" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
     <title>Нет - конфликту, да - гармонии!</title>
+    
+    <!-- Оптимизация загрузки шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-    <!-- Первые шаги в мире SVG-фавиконов -->
-    <!-- Самый надёжный вариант для большинства случаев -->
+    
+    <!-- Favicon -->
     <link rel="icon" href="image.png" type="image/x-icon">
-    <!-- И дополнительно для современных браузеров -->
     <link rel="icon" href="image.png" type="image/svg+xml">
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Школа Согласия" />
+    <link rel="manifest" href="site.webmanifest" />
 </head>
 <body>
     <nav>
@@ -43,17 +50,17 @@
                 Ученица 10А класса БМАОУ «СОШ № 45»
             </div>
         </div>
-        <div class="scroll-indicator" onclick="document.getElementById('problem').scrollIntoView({behavior: 'smooth'})">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+        <button class="scroll-indicator" onclick="document.getElementById('problem').scrollIntoView({behavior: 'smooth'})" aria-label="Прокрутить вниз">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
                 <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
             </svg>
-        </div>
+        </button>
     </section>
 
     <section id="problem" class="fade-in">
         <h2>Актуальность Проблемы</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; line-height: 1.8;">
-            Современные школьники всё чаще испытывают проблемы в межличственных отношениях, 
+            Современные школьники всё чаще испытывают проблемы в межличностных отношениях, 
             что приводит к росту конфликтных ситуаций в образовательной среде.
         </p>
         
@@ -74,28 +81,27 @@
                 <p>Учащиеся избегают решения проблем или решают их самостоятельно</p>
             </div>
         </div>
-    </section>
 
         <div class="system-interaction">
             <h3>Школа — сложная система взаимодействия</h3>
             <div class="actors">
                 <div class="actor">
-                    <div class="actor-icon">👨‍🎓</div>
+                    <div class="actor-icon" aria-hidden="true">👨‍🎓</div>
                     <strong>Ученики</strong>
                     <small>Формирование социальных навыков</small>
                 </div>
                 <div class="actor">
-                    <div class="actor-icon">👨‍🏫</div>
+                    <div class="actor-icon" aria-hidden="true">👨‍🏫</div>
                     <strong>Учителя</strong>
                     <small>Медиация и профилактика</small>
                 </div>
                 <div class="actor">
-                    <div class="actor-icon">👨‍👩‍👧</div>
+                    <div class="actor-icon" aria-hidden="true">👨‍👩‍👧</div>
                     <strong>Родители</strong>
                     <small>Семейное воспитание</small>
                 </div>
                 <div class="actor">
-                    <div class="actor-icon">🏫</div>
+                    <div class="actor-icon" aria-hidden="true">🏫</div>
                     <strong>Администрация</strong>
                     <small>Политика безопасности</small>
                 </div>
@@ -106,13 +112,34 @@
     <section id="conflict" class="conflict-section fade-in">
         <h2>Конфликт: Вред или Польза?</h2>
         
-        <div class="toggle-container">
-            <button class="toggle-btn active" onclick="showConflict('harm')">Вредная сторона</button>
-            <button class="toggle-btn" onclick="showConflict('benefit')">Полезная сторона</button>
-            <button class="toggle-btn" onclick="showConflict('types')">Виды конфликтов</button>
+        <div class="toggle-container" role="tablist" aria-label="Выбор аспекта конфликта">
+            <button class="toggle-btn active" 
+                    role="tab" 
+                    aria-selected="true"
+                    aria-controls="harm"
+                    id="tab-harm"
+                    onclick="showConflict('harm', this)">
+                Вредная сторона
+            </button>
+            <button class="toggle-btn" 
+                    role="tab" 
+                    aria-selected="false"
+                    aria-controls="benefit"
+                    id="tab-benefit"
+                    onclick="showConflict('benefit', this)">
+                Полезная сторона
+            </button>
+            <button class="toggle-btn" 
+                    role="tab" 
+                    aria-selected="false"
+                    aria-controls="types"
+                    id="tab-types"
+                    onclick="showConflict('types', this)">
+                Виды конфликтов
+            </button>
         </div>
 
-        <div id="harm" class="conflict-content active">
+        <div id="harm" class="conflict-content active" role="tabpanel" aria-labelledby="tab-harm">
             <div class="pros-cons-grid">
                 <div class="cons">
                     <h3>⚠️ Негативные последствия</h3>
@@ -130,7 +157,7 @@
             </div>
         </div>
 
-        <div id="benefit" class="conflict-content">
+        <div id="benefit" class="conflict-content" role="tabpanel" aria-labelledby="tab-benefit" hidden>
             <div class="pros-cons-grid">
                 <div class="pros">
                     <h3>✅ Позитивные возможности</h3>
@@ -148,7 +175,7 @@
             </div>
         </div>
 
-        <div id="types" class="conflict-content">
+        <div id="types" class="conflict-content" role="tabpanel" aria-labelledby="tab-types" hidden>
             <div class="problem-grid">
                 <div class="problem-card">
                     <h3>👥 Межличностные</h3>
@@ -271,8 +298,7 @@
                    учитель — строить уважительные отношения, а родитель — укреплять доверие. В выигрыше остаются все.</p>
             </div>
         </div>
-
-
+    </section>
 
     <section id="game" class="game-section fade-in">
         <h2>🎲 Школа Согласия: Игра</h2>
@@ -281,43 +307,43 @@
         </p>
 
         <div class="dice-container">
-            <div class="dice" onclick="rollDice(this)">d20</div>
-            <div class="dice" onclick="rollDice(this)">d6</div>
-            <div class="dice" onclick="rollDice(this)">d4</div>
+            <button class="dice" onclick="rollDice(this)" aria-label="Бросить кубик d20">d20</button>
+            <button class="dice" onclick="rollDice(this)" aria-label="Бросить кубик d6">d6</button>
+            <button class="dice" onclick="rollDice(this)" aria-label="Бросить кубик d4">d4</button>
         </div>
 
         <h3>Выбери своего персонажа</h3>
         <div class="characters-grid">
-            <div class="character-card" onclick="selectCharacter(this)">
-                <div class="character-icon">📚</div>
+            <button class="character-card" onclick="selectCharacter(this)" aria-pressed="false">
+                <div class="character-icon" aria-hidden="true">📚</div>
                 <h4>Отличник</h4>
                 <p>Коммуникабельность</p>
-            </div>
-            <div class="character-card" onclick="selectCharacter(this)">
-                <div class="character-icon">⚽</div>
+            </button>
+            <button class="character-card" onclick="selectCharacter(this)" aria-pressed="false">
+                <div class="character-icon" aria-hidden="true">⚽</div>
                 <h4>Спортсмен</h4>
                 <p>Авторитет</p>
-            </div>
-            <div class="character-card" onclick="selectCharacter(this)">
-                <div class="character-icon">🎨</div>
-                    <h4>Художник</h4>
-                    <p>Креативность</p>
-            </div>
-            <div class="character-card" onclick="selectCharacter(this)">
-                <div class="character-icon">💻</div>
+            </button>
+            <button class="character-card" onclick="selectCharacter(this)" aria-pressed="false">
+                <div class="character-icon" aria-hidden="true">🎨</div>
+                <h4>Художник</h4>
+                <p>Креативность</p>
+            </button>
+            <button class="character-card" onclick="selectCharacter(this)" aria-pressed="false">
+                <div class="character-icon" aria-hidden="true">💻</div>
                 <h4>Программист</h4>
                 <p>Самообладание</p>
-            </div>
-            <div class="character-card" onclick="selectCharacter(this)">
-                <div class="character-icon">📢</div>
+            </button>
+            <button class="character-card" onclick="selectCharacter(this)" aria-pressed="false">
+                <div class="character-icon" aria-hidden="true">📢</div>
                 <h4>Активистка</h4>
                 <p>Лидерство</p>
-            </div>
-            <div class="character-card" onclick="selectCharacter(this)">
-                <div class="character-icon">🌱</div>
+            </button>
+            <button class="character-card" onclick="selectCharacter(this)" aria-pressed="false">
+                <div class="character-icon" aria-hidden="true">🌱</div>
                 <h4>Новичок</h4>
                 <p>Развитие</p>
-            </div>
+            </button>
         </div>
 
         <div class="scenario-box">
@@ -336,7 +362,7 @@
                 </button>
             </div>
             
-            <div class="result-message" id="result"></div>
+            <div class="result-message" id="result" role="status" aria-live="polite"></div>
         </div>
 
         <div class="harmony-system">
@@ -440,13 +466,34 @@
     <section id="recommendations" class="recommendations-section fade-in">
         <h2>Рекомендации</h2>
         
-        <div class="rec-tabs">
-            <button class="rec-tab active" onclick="showRec('parents')">Для родителей</button>
-            <button class="rec-tab" onclick="showRec('teachers')">Для учителей</button>
-            <button class="rec-tab" onclick="showRec('students')">Для учащихся</button>
+        <div class="rec-tabs" role="tablist" aria-label="Рекомендации для">
+            <button class="rec-tab active" 
+                    role="tab" 
+                    aria-selected="true"
+                    aria-controls="parents"
+                    id="rec-parents"
+                    onclick="showRec('parents', this)">
+                Для родителей
+            </button>
+            <button class="rec-tab" 
+                    role="tab" 
+                    aria-selected="false"
+                    aria-controls="teachers"
+                    id="rec-teachers"
+                    onclick="showRec('teachers', this)">
+                Для учителей
+            </button>
+            <button class="rec-tab" 
+                    role="tab" 
+                    aria-selected="false"
+                    aria-controls="students"
+                    id="rec-students"
+                    onclick="showRec('students', this)">
+                Для учащихся
+            </button>
         </div>
 
-        <div id="parents" class="rec-content active">
+        <div id="parents" class="rec-content active" role="tabpanel" aria-labelledby="rec-parents">
             <div class="do-dont">
                 <div class="do">
                     <h3>✅ Что делать</h3>
@@ -471,7 +518,7 @@
             </div>
         </div>
 
-        <div id="teachers" class="rec-content">
+        <div id="teachers" class="rec-content" role="tabpanel" aria-labelledby="rec-teachers" hidden>
             <div class="cards">
                 <div class="card">
                     <h3>👁️ Признаки назревающего конфликта</h3>
@@ -503,7 +550,7 @@
             </div>
         </div>
 
-        <div id="students" class="rec-content">
+        <div id="students" class="rec-content" role="tabpanel" aria-labelledby="rec-students" hidden>
             <div class="phrases-box">
                 <h3>«Волшебные фразы» для разрешения конфликтов</h3>
                 <div class="phrase-list">
@@ -517,7 +564,7 @@
     </section>
 
     <footer>
-        <div class="peace-symbol">☮️</div>
+        <div class="peace-symbol" aria-hidden="true">☮️</div>
         <h2>Конфликт — не зло, а естественное явление</h2>
         <p>Всё зависит от умения управлять им. Проект «Школа согласия» даёт готовые инструменты для педагогов, учащихся и родителей.</p>
         <div class="footer-info">
