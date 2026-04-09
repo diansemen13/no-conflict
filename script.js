@@ -83,3 +83,68 @@ document.querySelectorAll('nav a').forEach(anchor => {
         }
     });
 });
+
+// ===== УПРАВЛЕНИЕ ТЕМНОЙ ТЕМОЙ =====
+(function() {
+    // Создаём кнопку переключения темы
+    const themeToggle = document.createElement('button');
+    themeToggle.className = 'theme-toggle';
+    themeToggle.setAttribute('aria-label', 'Переключить тему (светлая/тёмная)');
+    themeToggle.innerHTML = '🌙 Тёмная тема';
+    document.body.appendChild(themeToggle);
+
+    // Проверяем сохранённую тему в localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.innerHTML = '☀️ Светлая тема';
+    }
+
+    // Обработчик клика по кнопке
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        
+        if (document.body.classList.contains('dark-theme')) {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '☀️ Светлая тема';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '🌙 Тёмная тема';
+        }
+    });
+})();
+
+// ===== УЛУЧШЕНИЯ ДОСТУПНОСТИ =====
+
+// Добавляем возможность закрывать модальные окна по клавише Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        // Закрыть возможные активные модальные окна
+        const activeModals = document.querySelectorAll('.result-message.success, .result-message.warning');
+        activeModals.forEach(modal => {
+            modal.style.display = 'none';
+        });
+    }
+});
+
+// Автоматически добавляем атрибуты aria для интерактивных элементов
+document.querySelectorAll('.character-card').forEach((card, index) => {
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Выбрать персонажа ${card.querySelector('h4')?.textContent || index}`);
+});
+
+document.querySelectorAll('.choice-btn').forEach((btn, index) => {
+    btn.setAttribute('role', 'button');
+    btn.setAttribute('aria-label', `Вариант ответа ${index + 1}: ${btn.textContent}`);
+});
+
+// Улучшаем навигацию с клавиатуры
+document.querySelectorAll('a, button, .character-card, .choice-btn, .dice').forEach(el => {
+    el.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            el.click();
+        }
+    });
+});
