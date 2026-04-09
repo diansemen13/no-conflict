@@ -1,150 +1,205 @@
-const observerOptions = {
+/**
+ * Школа Согласия - Основные скрипты
+ * оптимизация: была удалена зависимость от глобального event, добавлена валидация
+ */
+
+// ===== константы =====
+const SELECTORS = {
+    FADE_IN: '.fade-in',
+    CONFLICT_CONTENT: '.conflict-content',
+    TOGGLE_BTN: '.toggle-btn',
+    REC_CONTENT: '.rec-content',
+    REC_TAB: '.rec-tab',
+    CHARACTER_CARD: '.character-card',
+    CHOICE_BTN: '.choice-btn',
+    RESULT: '#result',
+    NAV_ANCHOR: 'nav a'
+};
+
+const OBSERVER_OPTIONS = {
     threshold: 0.1,
     rootMargin: "0px 0px -50px 0px"
 };
 
+// ===== анимации при скролле =====
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Оптимизация: перестаем следить после показа
         }
     });
-}, observerOptions);
+}, OBSERVER_OPTIONS);
 
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll(SELECTORS.FADE_IN).forEach(el => observer.observe(el));
+});
 
-function showConflict(type) {
-    document.querySelectorAll('.conflict-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+// ===== переключение вкладов конфликтов =====
+function showConflict(type, btn) {
+    if (!btn) return;
     
-    document.getElementById(type).classList.add('active');
-    event.target.classList.add('active');
+    document.querySelectorAll(SELECTORS.CONFLICT_CONTENT).forEach(c => {
+        c.classList.remove('active');
+        c.hidden = true;
+    });
+    document.querySelectorAll(SELECTORS.TOGGLE_BTN).forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+    });
+    
+    const content = document.getElementById(type);
+    if (content) {
+        content.classList.add('active');
+        content.hidden = false;
+    }
+    
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
 }
 
-function showRec(type) {
-    document.querySelectorAll('.rec-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.rec-tab').forEach(t => t.classList.remove('active'));
+// ===== переключение рекомендаций  =====
+function showRec(type, btn) {
+    if (!btn) return;
     
-    document.getElementById(type).classList.add('active');
-    event.target.classList.add('active');
+    document.querySelectorAll(SELECTORS.REC_CONTENT).forEach(c => {
+        c.classList.remove('active');
+        c.hidden = true;
+    });
+    document.querySelectorAll(SELECTORS.REC_TAB).forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+    });
+    
+    const content = document.getElementById(type);
+    if (content) {
+        content.classList.add('active');
+        content.hidden = false;
+    }
+    
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
 }
 
+// ===== бросок кубиков  =====
 function rollDice(element) {
+    if (!element) return;
+    
     const diceType = element.textContent;
-    let max = 20;
-    if (diceType === 'd6') max = 6;
-    if (diceType === 'd4') max = 4;
+    const maxValues = { 'd20': 20, 'd6': 6, 'd4': 4 };
+    const max = maxValues[diceType] || 20;
     
     const result = Math.floor(Math.random() * max) + 1;
-    element.textContent = result;
-    element.style.transform = 'rotate(360deg)';
+    
+    element.style.transform = 'rotate(360deg) scale(1.1)';
+    element.textContent = '🎲';
+    element.disabled = true;
     
     setTimeout(() => {
-        element.style.transform = 'rotate(0deg)';
+        element.textContent = result;
+        element.style.transform = 'rotate(0deg) scale(1)';
+        
         setTimeout(() => {
             element.textContent = diceType;
+            element.disabled = false;
         }, 1000);
-    }, 600);
+    }, 300);
 }
 
+// ===== выбор персонажа =====
 function selectCharacter(card) {
-    document.querySelectorAll('.character-card').forEach(c => {
-        c.style.background = 'rgba(255,255,255,0.1)';
-        c.style.border = '1px solid rgba(255,255,255,0.2)';
+    if (!card) return;
+    
+    document.querySelectorAll(SELECTORS.CHARACTER_CARD).forEach(c => {
+        c.style.background = '';
+        c.style.border = '';
+        c.setAttribute('aria-pressed', 'false');
     });
-    card.style.background = 'rgba(255,255,255,0.3)';
+    
+    card.setAttribute('aria-pressed', 'true');
+    
+// здесь мы определяем тему
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const bgActive = isDark 
+        ? 'rgba(255,255,255,0.25)' 
+        : 'rgba(255,255,255,0.3)';
+    
+    card.style.background = bgActive;
     card.style.border = '2px solid #4ade80';
 }
 
+// ===== показ результата выбора =====
 function showResult(btn, type) {
-    const resultDiv = document.getElementById('result');
+    const resultDiv = document.querySelector(SELECTORS.RESULT);
+    if (!resultDiv) return;
+    
     resultDiv.className = 'result-message';
+    resultDiv.setAttribute('role', 'status');
     
-    document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+    // блокируем кнопки
+    document.querySelectorAll(SELECTORS.CHOICE_BTN).forEach(b => {
+        b.disabled = true;
+        b.style.opacity = '0.6';
+        b.style.cursor = 'not-allowed';
+    });
     
-    if (type === 'bad') {
-        resultDiv.classList.add('warning');
-        resultDiv.innerHTML = '<strong>-2 очка гармонии</strong><br>Обвинение приведёт к эскалации конфликта. Попробуй найти конструктивное решение.';
-    } else if (type === 'good') {
-        resultDiv.classList.add('success');
-        resultDiv.innerHTML = '<strong>+2 очка гармонии!</strong><br>Хороший выбор! Конструктивный диалог — ключ к решению.';
-    } else if (type === 'best') {
-        resultDiv.classList.add('success');
-        resultDiv.innerHTML = '<strong>+3 очка гармонии!</strong><br>Превосходно! Справедливое решение для всех.';
+    // текст результата
+    const messages = {
+        bad: {
+            class: 'warning',
+            html: '<strong>-2 очка гармонии</strong><br>Обвинение приведёт к эскалации конфликта. Попробуй найти конструктивное решение.'
+        },
+        good: {
+            class: 'success',
+            html: '<strong>+2 очка гармонии!</strong><br>Хороший выбор! Конструктивный диалог — ключ к решению.'
+        },
+        best: {
+            class: 'success',
+            html: '<strong>+3 очка гармонии!</strong><br>Превосходно! Справедливое решение для всех.'
+        }
+    };
+    
+    const msg = messages[type];
+    if (msg) {
+        resultDiv.classList.add(msg.class);
+        resultDiv.innerHTML = msg.html;
     }
 }
 
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    });
-});
-
-// ===== УПРАВЛЕНИЕ ТЕМНОЙ ТЕМОЙ =====
-(function() {
-    // Создаём кнопку переключения темы
-    const themeToggle = document.createElement('button');
-    themeToggle.className = 'theme-toggle';
-    themeToggle.setAttribute('aria-label', 'Переключить тему (светлая/тёмная)');
-    themeToggle.innerHTML = '🌙 Тёмная тема';
-    document.body.appendChild(themeToggle);
-
-    // Проверяем сохранённую тему в localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        themeToggle.innerHTML = '☀️ Светлая тема';
-    }
-
-    // Обработчик клика по кнопке
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-        
-        if (document.body.classList.contains('dark-theme')) {
-            localStorage.setItem('theme', 'dark');
-            themeToggle.innerHTML = '☀️ Светлая тема';
-        } else {
-            localStorage.setItem('theme', 'light');
-            themeToggle.innerHTML = '🌙 Тёмная тема';
-        }
-    });
-})();
-
-// ===== УЛУЧШЕНИЯ ДОСТУПНОСТИ =====
-
-// Добавляем возможность закрывать модальные окна по клавише Escape
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        // Закрыть возможные активные модальные окна
-        const activeModals = document.querySelectorAll('.result-message.success, .result-message.warning');
-        activeModals.forEach(modal => {
-            modal.style.display = 'none';
-        });
-    }
-});
-
-// Автоматически добавляем атрибуты aria для интерактивных элементов
-document.querySelectorAll('.character-card').forEach((card, index) => {
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', `Выбрать персонажа ${card.querySelector('h4')?.textContent || index}`);
-});
-
-document.querySelectorAll('.choice-btn').forEach((btn, index) => {
-    btn.setAttribute('role', 'button');
-    btn.setAttribute('aria-label', `Вариант ответа ${index + 1}: ${btn.textContent}`);
-});
-
-// Улучшаем навигацию с клавиатуры
-document.querySelectorAll('a, button, .character-card, .choice-btn, .dice').forEach(el => {
-    el.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+// ===== плавная навигация =====
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll(SELECTORS.NAV_ANCHOR).forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            el.click();
-        }
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Обновляем URL без перезагрузки
+                history.pushState(null, null, targetId);
+            }
+        });
     });
+    
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    }
 });
+
+// ===== улучшено: отслеживание смены темы =====
+// для динамического обновления стилей при смене системной темы
+if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        // перерисовка выбранных карточек персонажей
+        document.querySelectorAll(`${SELECTORS.CHARACTER_CARD}[aria-pressed="true"]`).forEach(card => {
+            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            card.style.background = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.3)';
+        });
+    });
+}
